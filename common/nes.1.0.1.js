@@ -3,8 +3,21 @@ class narray {
 		this.arr = arr;
 	}
 
+	capitalize() {
+		this.arr = this.arr.map((el) =>
+			new nstring(el + "").capitalize().exec()
+		);
+
+		return this;
+	}
+
 	clear() {
 		this.arr = this.arr.filter((el) => el != "");
+		return this;
+	}
+
+	lower() {
+		this.arr = this.arr.filter((el) => el.toLowerCase());
 		return this;
 	}
 	merge(arr) {
@@ -39,6 +52,11 @@ class narray {
 	}
 	unique() {
 		this.arr = this.arr.filter((el, i, arr) => arr.indexOf(el) == i);
+		return this;
+	}
+
+	upper() {
+		this.arr = this.arr.map((el) => el.toUpperCase());
 		return this;
 	}
 
@@ -94,6 +112,8 @@ class ndom {
 		}
 		return this;
 	}
+
+	$renderFn(fnData) {}
 }
 class nmath {
 	// constructor() {}
@@ -106,14 +126,9 @@ class nstring {
 		this.val = str;
 	}
 	capitalize() {
-		let words = this.val.split(" ");
-
 		this.val = this.val
-			.split(" ") //words
-			.map((word) => {
-				if (word.trim() == "") return word; //empty
-				return word.replace(word[0], word[0].toUpperCase()); //upper
-			})
+			.split(" ")
+			.map((word) => word.charAt(0).toUpperCase() + word.substr(1))
 			.join(" ");
 
 		return this;
