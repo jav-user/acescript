@@ -1,6 +1,6 @@
 const mergeFiles = require("merge-files");
 var __dirname = "_nes/";
-const outputPath = "common/nes.1.0.1.js";
+const outputPath = "common/nes-1.0.2.js";
 
 const inputPathList = [
 	__dirname + "nes.array.js",
