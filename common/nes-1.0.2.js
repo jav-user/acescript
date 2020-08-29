@@ -64,6 +64,18 @@ class narray {
 		return this.arr;
 	}
 }
+class nobj {
+	constructor(obj) {
+		this.obj;
+	}
+	clone() {
+		this.obj = JSON.parse(JSON.stringify(this.obj));
+		return this;
+	}
+	exec() {
+		return this;
+	}
+}
 class ndate {
 	constructor(date) {
 		this.date = date ? new Date(date) : new Date();

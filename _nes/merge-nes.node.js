@@ -4,6 +4,7 @@ const outputPath = "common/nes-1.0.2.js";
 
 const inputPathList = [
 	__dirname + "nes.array.js",
+	__dirname + "nes.obj.js",
 	__dirname + "nes.date.js",
 	__dirname + "nes.dom.js",
 	__dirname + "nes.math.js",

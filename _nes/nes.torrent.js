@@ -15,7 +15,7 @@ class ntorrent {
 		var Magnets = [];
 		magnets.forEach((magnet) => {
 			var Url = new URL(magnet);
-			var params = new URLSearchParams(url.search);
+			var params = new URLSearchParams(Url.search);
 			// var name = params.get("dn");
 			var Magnet = {
 				url: Url.href,
@@ -24,6 +24,7 @@ class ntorrent {
 				params: params,
 				name: params.get("dn"),
 				hash: params.get("xt"),
+				trackers: params.getAll("tr"),
 			};
 			Magnets.push(Magnet);
 		});
