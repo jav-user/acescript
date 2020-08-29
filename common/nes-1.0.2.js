@@ -242,6 +242,7 @@ class ntorrent {
 				params: params,
 				name: params.get("dn"),
 				hash: params.get("xt"),
+				trackers: params.getAll("tr"),
 			};
 			Magnets.push(Magnet);
 		});
