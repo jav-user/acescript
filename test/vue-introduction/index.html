@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="main.css">
+	</head>
+	<body>
+		<h1>vue-1</h1>
+
+		<div id="app7" v-cloak>
+			<h3>Groceries</h3>
+			<todo-item
+				v-for="item in groceryList"
+				v-bind:todo="item"
+				v-bind:key="item.id"
+			>
+			</todo-item>
+		</div>
+
+		<div v-cloak id="app-6">
+			<p>{{ message }}</p>
+			<input v-model="message" />
+		</div>
+
+		<div v-cloak id="app-5">
+			<p>{{ message }}</p>
+			<button v-on:click="reverseMessage">Reverse Message</button>
+		</div>
+
+		<div v-cloak id="app-4">
+			<ol>
+				<li v-for="todo in todos">
+					{{ todo.text }}
+				</li>
+			</ol>
+		</div>
+
+		<div v-cloak id="app-3">
+			<button v-on:click="seen=!seen">toggle</button>
+			<span v-if="seen">Now you see me</span>
+		</div>
+
+		<div v-cloak id="app-2">
+			<span v-bind:title="message" v-on:click="fn1">
+				Hover your mouse over me for a few seconds to see my dynamically
+				bound title!
+			</span>
+		</div>
+
+		<div v-cloak id="app">
+			{{ message }}
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.js" integrity="sha512-YXLGLsQBiwHPHLCAA9npZWhADUsHECjkZ71D1uzT2Hpop82/eLnmFb6b0jo8pK4T0Au0g2FETrRJNblF/46ZzQ==" crossorigin="anonymous"></script> -->
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.min.js" integrity="sha512-BKbSR+cfyxLdMAsE0naLReFSLg8/pjbgfxHh/k/kUC82Hy7r6HtR5hLhobaln2gcTvzkyyehrdREdjpsQwy2Jw==" crossorigin="anonymous"></script> -->
+		<script type="text/javascript" src="main.js"></script>
+	</body>
+</html>

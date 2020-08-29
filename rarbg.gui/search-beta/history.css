@@ -1,0 +1,30 @@
+.n-adult {
+	color: #eec8d1;
+}
+.n-series {
+	color: darkcyan;
+}
+.n-movies {
+	color: darkblue;
+}
+
+.n-zero-results {
+	color: gray;
+}
+
+.btn {
+  /* background-color: DodgerBlue; */
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.n-btn-danger{
+	background-color: darkred;
+}
+
+.n-btn-danger:hover{
+	background-color: red;
+}

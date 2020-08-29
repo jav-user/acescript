@@ -1,0 +1,34 @@
+.lost-connection {
+	color: purple;
+}
+
+.success-connection {
+	color: green;
+}
+
+.load-success {
+	color: green;
+}
+
+.load-error {
+	color: red;
+}
+
+.thumbnail-load {
+	max-width: 100% !important;
+	border-width: 3px;
+	border-color: green;
+}
+
+.thumbnail-error {
+	border-width: 3px;
+	border-color: red;
+}
+
+.input-success{
+	color: green;
+}
+
+.input-error{
+	color: red;
+}

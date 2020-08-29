@@ -1,0 +1,31 @@
+{{#rows}}
+<tr>
+	<td>{{idx}}</td>
+	<td
+		title="{{accessTitle}}"
+		style="color:{{color2}}; background-color:{{color1}}"
+	>
+		<img src="{{flag}}" /> {{access}}
+	</td>
+	<td>{{query}}</td>
+	<td>{{category}}</td>
+	<td>{{times}}</td>
+	<td>{{results}}</td>
+	<td>
+		<button
+			data-id="{{id}}"
+			data-query="{{query}}"
+			data-category="{{category}}"
+			class="btn btn-danger"
+			data-toggle="modal"
+			data-target="#myModal"
+		>
+			<i class="fa fa-trash"></i>
+			<!-- Delete -->
+		</button>
+		<a href="{{url}}" target="_blank" class="btn btn-primary"
+			><i class="fa fa-eye"></i
+		></a>
+	</td>
+</tr>
+{{/rows}} {{^rows}} No results :( {{/rows}}

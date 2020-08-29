@@ -1,0 +1,29 @@
+{
+  "name": "acescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "merge.node.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jav-user/acescript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jav-user/acescript/issues"
+  },
+  "homepage": "https://github.com/jav-user/acescript#readme",
+  "devDependencies": {
+    "vue-loader": "^15.9.3",
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}

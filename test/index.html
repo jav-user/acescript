@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Test...</title>
+	</head>
+	<body>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+		<script type="text/javascript">
+			class nobserv {
+				constructor(key) {
+					this.key = key;
+					this.val = eval(key);
+					this.oldval = this.val;
+				}
+				watch(callback) {
+					this.callback = callback;
+					this.interval = setInterval(() => {
+						this.val = eval(this.key);
+						if (this.oldval != this.val) {
+							this.callback();
+							this.oldval = this.val;
+						}
+					}, 1000);
+					return this;
+				}
+
+				unwatch() {
+					clearInterval(this.interval);
+					return this;
+				}
+			}
+		</script>
+	</body>
+</html>

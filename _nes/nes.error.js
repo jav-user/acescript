@@ -1,0 +1,7 @@
+class nerror{
+	constructor(){
+
+	}
+
+	
+}

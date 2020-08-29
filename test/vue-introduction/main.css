@@ -1,0 +1,15 @@
+[v-cloak] {
+	display: none;
+}
+
+[v-cloak]::before {
+	content: " ";
+	display: block;
+	position: absolute;
+	width: 80px;
+	height: 80px;
+	background-image: url(https://i.stack.imgur.com/naXEV.gif);
+	background-size: cover;
+	left: 50%;
+	top: 50%;
+}

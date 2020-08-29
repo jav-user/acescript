@@ -1,0 +1,89 @@
+.nfile {
+	font-size: 12px;
+	color: gray !important;
+	text-decoration: none;
+	/* font-weight: bold; */
+	/* color: black !important; */
+}
+
+.nfile:hover{
+	text-decoration: underline;
+}
+.nless-1gb.nadult-not {
+	color: #0000b0 !important;
+	font-weight: bold;
+}
+
+.nless-1gb.nadult {
+	/* color: #A00000 !important; */
+	/* color: #B2127D !important; */
+	color:  darkred !important;
+	font-weight: bold;
+}
+ 
+.nmovie.nless-3_5gb {
+	color: #0000b0 !important;
+	font-weight: bold;
+}
+
+.nseason.nless-10gb {
+	color: indigo !important;
+	font-weight: bold;
+}
+
+.nepisode.nion10 {
+	color: darkcyan !important;
+	font-weight: bold;
+}
+.nimageset {
+	/* color: #fb4f14 !important; */
+	color: darkgoldenrod !important;
+	font-weight: bold;
+	/* background-color: #8080ff; */
+	/* padding: 1px; */
+}
+.nthumbnail {
+	max-width: 200px;
+	/* font-weight: bold; */
+}
+
+/*
+.nthumbnail-container, .nthumbnail-container a {
+	max-width: 50px;
+	overflow: visible;
+}
+
+.nthumbnail:hover {
+	max-width: 300px;
+}
+*/
+
+.nless-10-minutes{
+	color: tomato !important;
+	font-weight: bold;
+}
+
+.nless-1-hour{
+	color: darkgreen !important;
+	font-weight: bold;
+}
+
+.nless-1-day{
+	color: darkblue !important;
+	font-weight: bold;
+}
+
+.nless-1-month{
+	color: blue !important;
+	font-weight: bold;
+}
+
+.nless-1-year{
+	color: black !important;
+	font-weight: bold;
+}
+
+.nmore-5-years{
+	color: darkred !important;
+	/* font-weight: bold; */
+}

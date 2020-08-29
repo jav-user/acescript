@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Torrent-vue</title>
+	</head>
+	<body>
+		<h2>Torrent-vue</h2>
+		<div id="main-app"></div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+		<!-- <script type="text/javascript" src="torrrent-vue.scripts.js"></script> -->
+		<script type="text/javascript" src="torrent-vue.plugin-image.js"></script>
+		<script type="text/javascript" src="torrent-vue.plugins-image.js"></script>
+		<script>
+			const app = new Vue({
+				el:"#main-app",
+				template:`<plugins-image></plugins-image>`
+			})
+		</script>
+	</body>
+</html>

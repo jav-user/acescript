@@ -1,0 +1,22 @@
+<div n-init="a=11" id="tpl" class="testing" data-n-nchanges="subtree(#tpl)">
+	<div n-init="b='abc'">
+		<input id="noloc" data-n-keyup="fnKeyup()" />
+		<input id="rick" data-n-keyup="fnKeyup()" />
+		<button
+			n-init="c=3"
+			id="btn1"
+
+			data-n-click="triggerChange(#btn2,b,'tres')"
+		>
+			btn1
+		</button>
+		<button
+			n-init="a=12"
+			id="btn2"
+			data-n-click="triggerChange(#btn1,'b','cuatro')"
+		>
+			btn2
+		</button>
+	</div>
+	<div n-init="d=4"></div>
+</div>
