@@ -68,6 +68,6 @@
 	color: darkred !important;
 }
 
-.msg.msg-not-seen {
-	color: green;
+.msg.msg-seen {
+	color: gray;
 }
