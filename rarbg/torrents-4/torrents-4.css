@@ -4,7 +4,7 @@
 	text-decoration: none;
 }
 
-.nfile:hover{
+.nfile:hover {
 	text-decoration: underline;
 }
 .nless-1gb.nadult-not {
@@ -13,10 +13,10 @@
 }
 
 .nless-1gb.nadult {
-	color:  darkred !important;
+	color: darkred !important;
 	font-weight: bold;
 }
- 
+
 .nmovie.nless-3_5gb {
 	color: #0000b0 !important;
 	font-weight: bold;
@@ -39,32 +39,35 @@
 	max-width: 250px;
 }
 
-
-.nless-10-minutes{
+.nless-10-minutes {
 	color: tomato !important;
 	font-weight: bold;
 }
 
-.nless-1-hour{
+.nless-1-hour {
 	color: darkgreen !important;
 	font-weight: bold;
 }
 
-.nless-1-day{
+.nless-1-day {
 	color: darkblue !important;
 	font-weight: bold;
 }
 
-.nless-1-month{
+.nless-1-month {
 	color: blue !important;
 	font-weight: bold;
 }
 
-.nless-1-year{
+.nless-1-year {
 	color: black !important;
 	font-weight: bold;
 }
 
-.nmore-5-years{
+.nmore-5-years {
 	color: darkred !important;
+}
+
+.msg.msg-not-seen {
+	color: green;
 }
