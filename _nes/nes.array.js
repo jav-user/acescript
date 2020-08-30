@@ -42,6 +42,10 @@ class narray {
 		}
 		return this;
 	}
+	reverse() {
+		this.arr = this.arr.reverse();
+		return this;
+	}
 	randomize() {
 		this.arr = this.arr.sort(() => 0.5 - Math.random());
 		return this;

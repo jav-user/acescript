@@ -71,6 +71,7 @@ const getImages = () => {
 			thumbnailSrc: SRC,
 			src: img.src,
 			host: SRC.hostname,
+			hostID: CryptoJS.MD5(SRC.hostname).toString(),
 			href: $(img).parents("a:first").prop("href"),
 		};
 		const id = CryptoJS.MD5(image.thumbnail).toString();
@@ -361,16 +362,39 @@ function loadImgComponent() {
 }
 loadImgComponent();
 
+const plugins = {
+	aeb9208a35f74624279ed80ef78782c6: {
+		fn: "src..",
+		fns: ["src..", "src..."],
+		host: "www.imgcarry.com",
+	},
+	noloc: {
+		fn: "rick",
+		fns: ["rick", "rick..."],
+	},
+	parec: {
+		fn: "falso",
+		fns: ["falso", "falso..."],
+	},
+};
+
 Vue.component("vimages", {
 	template: `
 	<span>
 		<span v-for="(image, id) in images">
+			<button @click="changeFnLeft(image.hostID)" >
+					<i class="fa fa-caret-left"></i>
+			</button>
+			<button @click="changeFnRight(image.hostID)" >
+					<i class="fa fa-caret-right"></i>
+			</button>
 			<input
 				:title="image.host"
-				v-model="plugins[image.host]" 
+				v-model="plugins[image.hostID].fn" 
 				v-bind:class="success ? 'input-success' : 'input-error'"/>
 				<br/>
-			<input v-model="image.src"/><br/>
+			<input v-model="image.src"/>
+				<br/>
 			<a :href="image.href" target="_blank">
 				<img 
 					:src="image.src" 
@@ -383,19 +407,14 @@ Vue.component("vimages", {
 		return {
 			images: Torrent.images,
 			def_images: JSON.parse(JSON.stringify(Torrent.images)),
-			plugins: {
-				"www.imgcarry.com": "src",
-			},
+			plugins: plugins,
+			pluginsDef: JSON.parse(JSON.stringify(plugins)),
 			success: false,
+			counters: {},
 		};
 	},
 	mounted() {
-		for (var host in this.plugins) {
-			console.log(host)
-			this.$watch("plugins." + host, function (a, b) {
-				console.log(a, b);
-			});
-		}
+		console.log(this.pluginsFn);
 	},
 	watch: {
 		// plugins: function (a, b, c) {
@@ -405,10 +424,28 @@ Vue.component("vimages", {
 	created() {
 		for (var id in this.images) {
 			var image = this.images[id];
-			if (!this.plugins[image.host]) this.plugins[image.host] = "src.";
+			if (!this.plugins[image.hostID]) {
+				this.plugins[image.hostID] = {
+					host: image.host,
+					fn: "src.",
+					fns: [],
+				};
+			}
 		}
-		// var id = CryptoJS.MD5("imgcarry.com").toString();
-		// console.log("id", id);
+
+		var pluginsFn = new narray([]);
+		for (var id in this.plugins) {
+			console.log(id);
+			var plugin = this.plugins[id];
+			pluginsFn.push(plugin.fn);
+			this.$watch(`$data.plugins.${id}.fn`, function (n, o) {
+				console.log(this.plugins[id]);
+			});
+
+			this.counters[id] = 0;
+		}
+
+		this.pluginsFn = pluginsFn.unique().exec();
 	},
 	methods: {
 		poster(id) {
@@ -430,6 +467,34 @@ Vue.component("vimages", {
 				image.src = this.def_images[id].src;
 				image.href = this.def_images[id].href;
 			}
+		},
+		changeFnRight(id) {
+			var pluginsFn = new narray([])
+				.push(this.plugins[id].fns)
+				.push(this.pluginsFn)
+				.push([this.plugins[id].fn])
+				.unique()
+				.exec();
+
+			var max = pluginsFn.length;
+			this.counters[id]++;
+			if (this.counters[id] == max) this.counters[id] = 0;
+
+			this.plugins[id].fn = pluginsFn[this.counters[id]];
+		},
+		changeFnLeft(id) {
+			var pluginsFn = new narray([])
+				.push(this.plugins[id].fns)
+				.push(this.pluginsFn)
+				.push([this.plugins[id].fn])
+				.unique()
+				.exec();
+
+			var max = pluginsFn.length;
+			this.counters[id]--;
+			if (this.counters[id] == -1) this.counters[id] = max;
+
+			this.plugins[id].fn = pluginsFn[this.counters[id]];
 		},
 	},
 });

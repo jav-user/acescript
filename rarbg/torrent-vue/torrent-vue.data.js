@@ -28,6 +28,7 @@ const getImages = () => {
 			thumbnailSrc: SRC,
 			src: img.src,
 			host: SRC.hostname,
+			hostID: CryptoJS.MD5(SRC.hostname).toString(),
 			href: $(img).parents("a:first").prop("href"),
 		};
 		const id = CryptoJS.MD5(image.thumbnail).toString();
