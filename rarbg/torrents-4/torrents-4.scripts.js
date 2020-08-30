@@ -61,7 +61,7 @@ const SearchList = RarbgRef.collection("search_");
 const HistoryRef = RarbgRef.collection("history_");
 const UploadersRef = RarbgRef.collection("uploaders_");
 
-$(document).ready(function() {
+$(document).ready(function () {
 	getIp()
 		.then((ip) => {
 			console.log("loading history...");
@@ -95,3 +95,10 @@ async function getIp() {
 	}
 	return Lockr.get("ipdata");
 }
+
+const pages = ($("#pager_links").children().length || 2) - 1;
+const resultspp = $("tr.lista2").length;
+
+var SID = CryptoJS.MD5(`${SEARCH} | ${CATEGORY}`).toString();
+const SearchDoc = SearchList.doc(SID);
+const AccessList = SearchDoc.collection("access");

@@ -71,3 +71,8 @@
 .msg.msg-seen {
 	color: gray;
 }
+
+
+.msg.msg-not-seen {
+	font-weight: bold;
+}

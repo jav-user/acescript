@@ -159,3 +159,24 @@ function posterAll() {
 	console.log("posterall...");
 	swPoster = true;
 }
+
+function toggleImageset() {
+	const $imgset = $("a.nimageset");
+	if ($imgset.length > 0) {
+		var $html = $(`
+			<div>
+				<button name="ntoggle">
+					Toggle Imageset (${$imgset.length})
+				</button>
+			</div>`);
+		$("#searchTorrent").after($html);
+		// console.log("len", $imgset.length);
+		$html.find("[name=ntoggle]").on("click", function () {
+			$imgset.each((i, is) => {
+				// console.log(is)
+				$(is).parents("tr:first").fadeToggle(1000);
+			});
+		});
+	}
+}
+toggleImageset();

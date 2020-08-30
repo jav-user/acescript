@@ -232,11 +232,13 @@ class ntorrent {
 			.map((a) => a.href);
 		var Magnets = [];
 		magnets.forEach((magnet) => {
-			var url = new URL(magnet);
+			var Url = new URL(magnet);
 			var params = new URLSearchParams(url.search);
 			// var name = params.get("dn");
 			var Magnet = {
-				url: url,
+				url: Url.href,
+				search: Url.search,
+				Url: Url,
 				params: params,
 				name: params.get("dn"),
 				hash: params.get("xt"),

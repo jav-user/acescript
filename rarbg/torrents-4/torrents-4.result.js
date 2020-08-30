@@ -61,7 +61,7 @@ const SearchList = RarbgRef.collection("search_");
 const HistoryRef = RarbgRef.collection("history_");
 const UploadersRef = RarbgRef.collection("uploaders_");
 
-$(document).ready(function() {
+$(document).ready(function () {
 	getIp()
 		.then((ip) => {
 			console.log("loading history...");
@@ -95,6 +95,13 @@ async function getIp() {
 	}
 	return Lockr.get("ipdata");
 }
+
+const pages = ($("#pager_links").children().length || 2) - 1;
+const resultspp = $("tr.lista2").length;
+
+var SID = CryptoJS.MD5(`${SEARCH} | ${CATEGORY}`).toString();
+const SearchDoc = SearchList.doc(SID);
+const AccessList = SearchDoc.collection("access");
 $tableTr.each((i, tr) => {
 	const $td = $(tr).children("td");
 	const $f = {};
@@ -362,12 +369,27 @@ function posterAll() {
 	console.log("posterall...");
 	swPoster = true;
 }
-const pages = ($("#pager_links").children().length || 2) - 1;
-const resultspp = $("tr.lista2").length;
 
-var SID = CryptoJS.MD5(`${SEARCH} | ${CATEGORY}`).toString();
-const SearchDoc = SearchList.doc(SID);
-const AccessList = SearchDoc.collection("access");
+function toggleImageset() {
+	const $imgset = $("a.nimageset");
+	if ($imgset.length > 0) {
+		var $html = $(`
+			<div>
+				<button name="ntoggle">
+					Toggle Imageset (${$imgset.length})
+				</button>
+			</div>`);
+		$("#searchTorrent").after($html);
+		// console.log("len", $imgset.length);
+		$html.find("[name=ntoggle]").on("click", function () {
+			$imgset.each((i, is) => {
+				// console.log(is)
+				$(is).parents("tr:first").fadeToggle(1000);
+			});
+		});
+	}
+}
+toggleImageset();
 
 async function saveSearch() {
 	SEARCH = SEARCH.trim();
