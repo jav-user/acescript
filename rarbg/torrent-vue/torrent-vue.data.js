@@ -25,6 +25,7 @@ const getImages = () => {
 			$: $imgs.eq(i),
 			thumbnail: img.src,
 			thumbnailURL: new URL(img.src),
+			url: img.src,
 		};
 		const id = CryptoJS.MD5(image.thumbnail).toString();
 		Images[id] = image;
@@ -36,17 +37,17 @@ const getTorrentInfo = () => {
 	var Magnet = new ntorrent(TableData.torrent.$[0]).getMagnets()[0];
 	Torrent.size = TableData.size.text;
 	// Torrent.images = Images.map((Img) => Img.url);
-	Torrent.images = {};
-	Torrent.imagesArr = [];
-	for (var id in Images) {
-		const image = {
-			id: id,
-			thumbnail: Images[id].thumbnail,
-			url: Images[id].thumbnail,
-		};
-		Torrent.images[id] = image;
-		Torrent.imagesArr.push(image);
-	}
+	Torrent.images = Images;
+	// Torrent.imagesArr = [];
+	// for (var id in Images) {
+	// 	const image = {
+	// 		id: id,
+	// 		thumbnail: Images[id].thumbnail,
+	// 		url: Images[id].thumbnail,
+	// 	};
+	// 	Torrent.images[id] = image;
+	// 	Torrent.imagesArr.push(image);
+	// }
 	// Torrent.name = Magnet.name;
 	// Torrent.hash = Magnet.hash;
 	// Torrent.magnetUrl = Magnet.url;

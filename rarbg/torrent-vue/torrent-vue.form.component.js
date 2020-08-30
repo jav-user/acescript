@@ -70,7 +70,7 @@ Vue.component("vform", {
           <td class="header2">images:</td>
           <td class="lista">
             <span v-for="(image, id) in torrent.images">
-            <input :id="id" :value="image.fullsize || image.thumbnail"/><br/>
+            <input :id="id" :value="image.url"/><br/>
           </span>  
           </td>
       </tr>

@@ -34,5 +34,22 @@ class ndom {
 		return this;
 	}
 
+	addStyleOnce(href, id, delay) {
+		if (!delay) delay = 0;
+		var link = document.createElement("link");
+		link.id = id;
+		link.rel = "stylesheet";
+		link.type = "text/css";
+
+		link.href = href;
+		var head = document.querySelector("head");
+		if (!head.querySelector(`link[id=${id}]`)) {
+			setTimeout(() => {
+				head.appendChild(link);
+			}, delay * 1000);
+		}
+		return this;
+	}
+
 	$renderFn(fnData) {}
 }

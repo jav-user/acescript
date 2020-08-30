@@ -68,6 +68,7 @@ const getImages = () => {
 			$: $imgs.eq(i),
 			thumbnail: img.src,
 			thumbnailURL: new URL(img.src),
+			url: img.src,
 		};
 		const id = CryptoJS.MD5(image.thumbnail).toString();
 		Images[id] = image;
@@ -79,17 +80,17 @@ const getTorrentInfo = () => {
 	var Magnet = new ntorrent(TableData.torrent.$[0]).getMagnets()[0];
 	Torrent.size = TableData.size.text;
 	// Torrent.images = Images.map((Img) => Img.url);
-	Torrent.images = {};
-	Torrent.imagesArr = [];
-	for (var id in Images) {
-		const image = {
-			id: id,
-			thumbnail: Images[id].thumbnail,
-			url: Images[id].thumbnail,
-		};
-		Torrent.images[id] = image;
-		Torrent.imagesArr.push(image);
-	}
+	Torrent.images = Images;
+	// Torrent.imagesArr = [];
+	// for (var id in Images) {
+	// 	const image = {
+	// 		id: id,
+	// 		thumbnail: Images[id].thumbnail,
+	// 		url: Images[id].thumbnail,
+	// 	};
+	// 	Torrent.images[id] = image;
+	// 	Torrent.imagesArr.push(image);
+	// }
 	// Torrent.name = Magnet.name;
 	// Torrent.hash = Magnet.hash;
 	// Torrent.magnetUrl = Magnet.url;
@@ -249,11 +250,11 @@ Vue.component("vform", {
               <td class="lista"><input v-model="torrent.poster"  /></td>
               <td class="lista"><button  type="button"  @click="ndefault('poster')" title="default"><i class="fa fa-undo"></i></button></td>          
       </tr>
-      <tr v-show="toggle">
+      <tr v-show="toggle && torrent.images">
           <td class="header2">images:</td>
           <td class="lista">
-            <span v-for="image in torrent.imagesArr">
-            <input :value="image.fullsize || image.thumbnail"/><br/>
+            <span v-for="(image, id) in torrent.images">
+            <input :id="id" :value="image.url"/><br/>
           </span>  
           </td>
       </tr>
