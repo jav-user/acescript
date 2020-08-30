@@ -16,7 +16,7 @@
 
 
 .poster {
-	max-width: 100%;
+	max-width: 100% !important;
 	border-width: 3px;
 	border-color: green;
 }
