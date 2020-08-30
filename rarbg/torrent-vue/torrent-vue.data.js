@@ -20,12 +20,14 @@ const getImages = () => {
 	var $d = TableData["description"].$;
 	var $imgs = $d.find("img");
 	$imgs.each((i, img) => {
+		var SRC = new URL(img.src);
 		var image = {
 			html: img,
 			$: $imgs.eq(i),
 			thumbnail: img.src,
-			thumbnailSrc: new URL(img.src),
+			thumbnailSrc: SRC,
 			src: img.src,
+			host: SRC.hostname,
 			href: $(img).parents("a:first").prop("href"),
 		};
 		const id = CryptoJS.MD5(image.thumbnail).toString();

@@ -63,12 +63,14 @@ const getImages = () => {
 	var $d = TableData["description"].$;
 	var $imgs = $d.find("img");
 	$imgs.each((i, img) => {
+		var SRC = new URL(img.src);
 		var image = {
 			html: img,
 			$: $imgs.eq(i),
 			thumbnail: img.src,
-			thumbnailSrc: new URL(img.src),
+			thumbnailSrc: SRC,
 			src: img.src,
+			host: SRC.hostname,
 			href: $(img).parents("a:first").prop("href"),
 		};
 		const id = CryptoJS.MD5(image.thumbnail).toString();
@@ -364,6 +366,7 @@ Vue.component("vimages", {
 	<span>
 		<span v-for="(image, id) in images">
 			<input
+				:title="image.host"
 				v-model="plugins[image.host]" 
 				v-bind:class="success ? 'input-success' : 'input-error'"/>
 				<br/>
@@ -381,18 +384,18 @@ Vue.component("vimages", {
 			images: Torrent.images,
 			def_images: JSON.parse(JSON.stringify(Torrent.images)),
 			plugins: {
-				"imgcarry.com": {
-					fn: "src",
-					host: "imgcarry.com",
-				},
+				"www.imgcarry.com": "src",
 			},
 			success: false,
 		};
 	},
-	mounted(){
-		this.$watch('plugins', function(a,b,c){
-			console.log(a["imgcarry.com"].fn,b["imgcarry.com"].fn,c)
-		}, { deep: true })
+	mounted() {
+		for (var host in this.plugins) {
+			console.log(host)
+			this.$watch("plugins." + host, function (a, b) {
+				console.log(a, b);
+			});
+		}
 	},
 	watch: {
 		// plugins: function (a, b, c) {
@@ -400,6 +403,10 @@ Vue.component("vimages", {
 		// },
 	},
 	created() {
+		for (var id in this.images) {
+			var image = this.images[id];
+			if (!this.plugins[image.host]) this.plugins[image.host] = "src.";
+		}
 		// var id = CryptoJS.MD5("imgcarry.com").toString();
 		// console.log("id", id);
 	},
