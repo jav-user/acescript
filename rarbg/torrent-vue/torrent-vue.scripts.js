@@ -23,7 +23,7 @@ new ndom()
 		"https://jav-user.github.io/acescript/rarbg/torrent-vue.css",
 		"torrent-vue-css"
 	)
-	.addStyle(
+	.addStyleOnce(
 		"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css",
 		"font-awesome"
 	);

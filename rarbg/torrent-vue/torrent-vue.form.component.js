@@ -70,7 +70,7 @@ Vue.component("vform", {
           <td class="header2">images:</td>
           <td class="lista">
             <span v-for="(image, id) in torrent.images">
-            <input :id="id" :value="image.url"/><br/>
+            <input :id="id" :value="image.src"/><br/>
           </span>  
           </td>
       </tr>

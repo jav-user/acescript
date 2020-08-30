@@ -67,8 +67,9 @@ const getImages = () => {
 			html: img,
 			$: $imgs.eq(i),
 			thumbnail: img.src,
-			thumbnailURL: new URL(img.src),
-			url: img.src,
+			thumbnailSrc: new URL(img.src),
+			src: img.src,
+			href: $(img).parents("a:first").prop("href"),
 		};
 		const id = CryptoJS.MD5(image.thumbnail).toString();
 		Images[id] = image;
@@ -254,7 +255,7 @@ Vue.component("vform", {
           <td class="header2">images:</td>
           <td class="lista">
             <span v-for="(image, id) in torrent.images">
-            <input :id="id" :value="image.url"/><br/>
+            <input :id="id" :value="image.src"/><br/>
           </span>  
           </td>
       </tr>
