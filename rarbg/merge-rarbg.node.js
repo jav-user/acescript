@@ -15,6 +15,7 @@ const torrent=[
 	__dirname + "torrent-vue.scripts.js",
 	__dirname + "torrent-vue.data.js",
 	__dirname + "torrent-vue.form.component.js",
+	__dirname + "torrent-vue.images.component.js",
 	__dirname + "torrent-vue.last.js",
 
 ]

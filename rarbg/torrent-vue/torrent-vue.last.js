@@ -6,3 +6,4 @@ function autoSize() {
 	new n$input($("input")).autoSize();
 }
 autoSize();
+

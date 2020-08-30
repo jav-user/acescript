@@ -7,6 +7,6 @@ class nobj {
 		return this;
 	}
 	exec() {
-		return this;
+		return this.obj;
 	}
 }

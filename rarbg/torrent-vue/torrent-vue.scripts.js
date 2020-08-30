@@ -20,7 +20,7 @@
 
 new ndom()
 	.addStyle(
-		"https://jav-user.github.io/acescript/rarbg/torrent-vue.css",
+		"https://jav-user.github.io/acescript/rarbg/torrent-vue/torrent-vue.css",
 		"torrent-vue-css"
 	)
 	.addStyleOnce(
