@@ -13,9 +13,8 @@ Vue.component("vimages", {
 	template: `
 	<span>
 		<span v-for="(image, id) in images">
-			<input 
-				v-model="plugin" 
-				@change="poster(id)" 
+			<input
+				v-model="plugins[image.host].fn" 
 				v-bind:class="success ? 'input-success' : 'input-error'"/>
 				<br/>
 			<input v-model="image.src"/><br/>
@@ -31,9 +30,28 @@ Vue.component("vimages", {
 		return {
 			images: Torrent.images,
 			def_images: JSON.parse(JSON.stringify(Torrent.images)),
-			plugin: "src",
+			plugins: {
+				"imgcarry.com": {
+					fn: "src",
+					host: "imgcarry.com",
+				},
+			},
 			success: false,
 		};
+	},
+	mounted(){
+		this.$watch('plugins', function(a,b,c){
+			console.log(a["imgcarry.com"].fn,b["imgcarry.com"].fn,c)
+		}, { deep: true })
+	},
+	watch: {
+		// plugins: function (a, b, c) {
+		// 	console.log(a, b, c);
+		// },
+	},
+	created() {
+		// var id = CryptoJS.MD5("imgcarry.com").toString();
+		// console.log("id", id);
 	},
 	methods: {
 		poster(id) {
