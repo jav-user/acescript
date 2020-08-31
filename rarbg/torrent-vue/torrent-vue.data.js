@@ -21,18 +21,21 @@ const getImages = () => {
 	var $imgs = $d.find("img");
 	$imgs.each((i, img) => {
 		var SRC = new URL(img.src);
-		var image = {
-			html: img,
-			$: $imgs.eq(i),
+		var data = {
 			thumbnail: img.src,
-			thumbnailSrc: SRC,
+			// thumbnailSrc: SRC,
 			src: img.src,
 			host: SRC.hostname,
 			hostID: CryptoJS.MD5(SRC.hostname).toString(),
 			href: $(img).parents("a:first").prop("href"),
 		};
-		const id = CryptoJS.MD5(image.thumbnail).toString();
-		Images[id] = image;
+
+		var dom = {
+			html: img,
+			$: $imgs.eq(i),
+		};
+		const id = CryptoJS.MD5(data.thumbnail).toString();
+		Images[id] = data;
 	});
 	// console.log($imgs)
 };

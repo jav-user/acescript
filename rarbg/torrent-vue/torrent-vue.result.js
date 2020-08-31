@@ -69,18 +69,21 @@ const getImages = () => {
 	var $imgs = $d.find("img");
 	$imgs.each((i, img) => {
 		var SRC = new URL(img.src);
-		var image = {
-			html: img,
-			$: $imgs.eq(i),
+		var data = {
 			thumbnail: img.src,
-			thumbnailSrc: SRC,
+			// thumbnailSrc: SRC,
 			src: img.src,
 			host: SRC.hostname,
 			hostID: CryptoJS.MD5(SRC.hostname).toString(),
 			href: $(img).parents("a:first").prop("href"),
 		};
-		const id = CryptoJS.MD5(image.thumbnail).toString();
-		Images[id] = image;
+
+		var dom = {
+			html: img,
+			$: $imgs.eq(i),
+		};
+		const id = CryptoJS.MD5(data.thumbnail).toString();
+		Images[id] = data;
 	});
 	// console.log($imgs)
 };
@@ -358,41 +361,14 @@ const vform = new Vue({
 console.log(Torrent);
 function loadImgComponent() {
 	if (!TableData.description) return false;
-	// console.log(TableData.description);
 	TableData.description.$.find("img").remove();
 	TableData.description.$.append(`
 		<div id="app-images">
 			<vimages></vimages>
 		</div>`);
 }
+
 loadImgComponent();
-
-
-
-async function loadPlugins() {
-	const ids = [];
-
-	for (var id in Torrent.images) {
-		var img = Torrent.images[id];
-		ids.push(img.hostID);
-	}
-	// console.log(ids)
-	const refs = ids.map((id) => PluginsList.doc(id).get());
-	return Promise.all(refs).then((q) => {
-		const plugins = {};
-		q.forEach((doc) => {
-			if (doc.exists) plugins[doc.id] = doc.data();
-		});
-		return plugins;
-	});
-}
-
-
-
-async function savePlugin(id, plugin) {
-	new narray(plugin.fns).push(plugin.fn).unique()
-	PluginsList.doc(id).set(plugin);
-}
 
 Vue.component("vimages", function (solve, reject) {
 	loadPlugins().then((plugins) => {
@@ -418,6 +394,7 @@ Vue.component("vimages", function (solve, reject) {
 			<a :href="image.href" target="_blank">
 				<img
 					:src="image.src"
+					@error="success=false"
 					v-bind:class="success ? 'poster' : 'thumbnail'"
 					/>
 			</a>
@@ -434,7 +411,7 @@ Vue.component("vimages", function (solve, reject) {
 				};
 			},
 			mounted() {
-				console.log(this.pluginsFn);
+				console.log("pluginsFn", this.pluginsFn);
 			},
 			watch: {
 				// plugins: function (a, b, c) {
@@ -442,7 +419,7 @@ Vue.component("vimages", function (solve, reject) {
 				// },
 			},
 			created() {
-				console.log(this.plugins);
+				// console.log(this.plugins);
 				for (var id in this.images) {
 					var image = this.images[id];
 					if (!this.plugins[image.hostID]) {
@@ -451,16 +428,14 @@ Vue.component("vimages", function (solve, reject) {
 							fn: "src.",
 							fns: [],
 						};
-
-						this.onPlugin(image.hostID);
 						// this.plugins[image.hostID] = plugin;
 						this.$set(this.plugins, image.hostID, plugin);
-
+						// this.onPlugin(image.hostID);
 					}
 				}
 
 				var pluginsFn = new narray([]);
-				console.log(this.plugins);
+				// console.log(this.plugins);
 				for (var id in this.plugins) {
 					console.log(id);
 					var plugin = this.plugins[id];
@@ -468,14 +443,15 @@ Vue.component("vimages", function (solve, reject) {
 					this.$watch(
 						`$data.plugins.${id}.fn`,
 						function (n, o) {
-							console.log(id, "test...");
+							// console.log(id, "test...");
 							this.onPlugin(id);
 						},
 						{ deep: true }
 					);
-					console.log(this.$watch);
+					// console.log(this.$watch);
 
 					this.counters[id] = 0;
+					this.onPlugin(id);
 				}
 
 				this.pluginsFn = pluginsFn.unique().exec();
@@ -485,10 +461,10 @@ Vue.component("vimages", function (solve, reject) {
 					savePlugin(id, this.plugins[id]);
 				},
 				onPlugin(id) {
-					console.log("onPlugin...",id)
+					// console.log(id)
 					var host = this.plugins[id].host;
 					var fn = this.plugins[id].fn;
-					console.log(id, host, fn);
+					// console.log(id, host, fn);
 
 					for (var id in this.images) {
 						var img = this.images[id];
@@ -498,7 +474,7 @@ Vue.component("vimages", function (solve, reject) {
 					}
 				},
 				poster2(id, fn) {
-					console.log(id, fn);
+					// console.log(id, fn);
 					var image = this.images[id];
 					var imageDef = this.imagesDef[id];
 
@@ -511,31 +487,12 @@ Vue.component("vimages", function (solve, reject) {
 						this.success = image.src != src;
 						image.src = src;
 						image.href = src;
+						image.poster = src;
 					} catch (err) {
 						console.log("Error in plugin");
 						this.success = false;
 						image.src = imageDef.src;
 						image.href = imageDef.href;
-					}
-				},
-				poster(id) {
-					// console.log(id, this.imagesDef[id].src);
-					var image = this.images[id];
-					image.src = this.imagesDef[id].src;
-					image.href = this.imagesDef[id].href;
-					var src = image.src;
-					try {
-						src = eval(this.plugins[image.hostID].fn);
-						var Src = new URL(src);
-						console.log(image.src != src);
-						this.success = image.src != src;
-						image.src = src;
-						image.href = src;
-					} catch (err) {
-						console.log("Error in plugin");
-						this.success = false;
-						image.src = this.imagesDef[id].src;
-						image.href = this.imagesDef[id].href;
 					}
 				},
 				changeFnRight(id) {
@@ -559,10 +516,10 @@ Vue.component("vimages", function (solve, reject) {
 						.push([this.plugins[id].fn])
 						.unique()
 						.exec();
-
+					// console.log(pluginsFn, this.counter[id]);
 					var max = pluginsFn.length;
 					this.counters[id]--;
-					if (this.counters[id] == -1) this.counters[id] = max;
+					if (this.counters[id] == -1) this.counters[id] = max - 1;
 
 					this.plugins[id].fn = pluginsFn[this.counters[id]];
 				},
@@ -574,6 +531,29 @@ Vue.component("vimages", function (solve, reject) {
 const appImages = new Vue({
 	el: "#app-images",
 });
+
+async function loadPlugins() {
+	const ids = [];
+
+	for (var id in Torrent.images) {
+		var img = Torrent.images[id];
+		ids.push(img.hostID);
+	}
+	// console.log(ids)
+	const refs = ids.map((id) => PluginsList.doc(id).get());
+	return Promise.all(refs).then((q) => {
+		const plugins = {};
+		q.forEach((doc) => {
+			if (doc.exists) plugins[doc.id] = doc.data();
+		});
+		return plugins;
+	});
+}
+
+async function savePlugin(id, plugin) {
+	new narray(plugin.fns).push(plugin.fn).unique();
+	PluginsList.doc(id).set(plugin);
+}
 // const app = new Vue({
 // 	el: "#torrent-app",
 // });
