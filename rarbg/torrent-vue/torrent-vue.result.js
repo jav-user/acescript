@@ -201,7 +201,10 @@ Vue.component("vform", {
           <tr>
             <td class="header2">Actions: </td>
             <td>
-                <button type="button" @click="toggle=!toggle">{{toggle ? "hide" : "show"}}</button>
+                <button type="button" @click="toggle=!toggle">
+                  <i class="fa fa-eye" v-show="!toggle"></i>
+                  <i class="fa fa-eye-slash" v-show="toggle"></i>
+                </button>
                 <button type="submit"><i class="fa fa-save"></i></button>
             </td>
           </tr>
@@ -412,14 +415,6 @@ Vue.component("vimages", function (solve, reject) {
 					counters: {},
 				};
 			},
-			mounted() {
-				console.log("pluginsFn", this.pluginsFn);
-			},
-			watch: {
-				// plugins: function (a, b, c) {
-				// 	console.log(a, b, c);
-				// },
-			},
 			created() {
 				// console.log(this.plugins);
 				for (var id in this.images) {
@@ -430,9 +425,7 @@ Vue.component("vimages", function (solve, reject) {
 							fn: "src.",
 							fns: [],
 						};
-						// this.plugins[image.hostID] = plugin;
 						this.$set(this.plugins, image.hostID, plugin);
-						// this.onPlugin(image.hostID);
 					}
 				}
 
@@ -507,9 +500,11 @@ Vue.component("vimages", function (solve, reject) {
 
 					var max = pluginsFn.length;
 					this.counters[id]++;
+					console.log(this.pluginsFn, pluginsFn, this.counters[id]);
 					if (this.counters[id] == max) this.counters[id] = 0;
 
 					this.plugins[id].fn = pluginsFn[this.counters[id]];
+					// this.$set(this.plugins, id+".fn", pluginsFn[this.counters[id]]);
 				},
 				changeFnLeft(id) {
 					var pluginsFn = new narray([])
@@ -518,7 +513,7 @@ Vue.component("vimages", function (solve, reject) {
 						.push([this.plugins[id].fn])
 						.unique()
 						.exec();
-					// console.log(pluginsFn, this.counter[id]);
+					console.log(this.pluginsFn, pluginsFn, this.counters[id]);
 					var max = pluginsFn.length;
 					this.counters[id]--;
 					if (this.counters[id] == -1) this.counters[id] = max - 1;
@@ -548,7 +543,19 @@ async function loadPlugins() {
 		q.forEach((doc) => {
 			if (doc.exists) plugins[doc.id] = doc.data();
 		});
+		console.log("plugins", new nobj(plugins).clone().exec());
 		return plugins;
+	});
+}
+
+async function loadPlugins2() {
+	var plugins = {};
+	return PluginsList.get().then((q) => {
+		q.forEach((doc) => {
+			if (doc.exists) plugins[doc.id] = doc.data();
+		});
+		console.log("plugins", plugins);
+		return new nobj(plugins).clone().exec();
 	});
 }
 

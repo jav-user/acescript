@@ -5,7 +5,10 @@ Vue.component("vform", {
           <tr>
             <td class="header2">Actions: </td>
             <td>
-                <button type="button" @click="toggle=!toggle">{{toggle ? "hide" : "show"}}</button>
+                <button type="button" @click="toggle=!toggle">
+                  <i class="fa fa-eye" v-show="!toggle"></i>
+                  <i class="fa fa-eye-slash" v-show="toggle"></i>
+                </button>
                 <button type="submit"><i class="fa fa-save"></i></button>
             </td>
           </tr>
