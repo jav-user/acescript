@@ -28,6 +28,11 @@ new ndom()
 		"font-awesome"
 	);
 
+const RarbgRef = db.collection("RARBG").doc("RARBG");
+const PluginsList = RarbgRef.collection("plugins_");
+// const HistoryRef = RarbgRef.collection("history_");
+// const UploadersRef = RarbgRef.collection("uploaders_");
+
 // console.log("scripts...");
 
 // $("h1").parents("table:first").attr("id", "vform");
