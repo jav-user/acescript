@@ -10,7 +10,7 @@ function loadImgComponent() {
 loadImgComponent();
 
 Vue.component("vimages", function (solve, reject) {
-	loadPlugins2().then((plugins) => {
+	loadPlugins().then((plugins) => {
 		solve({
 			template: `
 	<span>
@@ -58,7 +58,7 @@ Vue.component("vimages", function (solve, reject) {
 					if (!this.plugins[image.hostID]) {
 						var plugin = {
 							host: image.host,
-							fn: "src.",
+							fn: 'src.replace("","")',
 							fns: [],
 						};
 						this.$set(this.plugins, image.hostID, plugin);
@@ -161,9 +161,11 @@ Vue.component("vimages", function (solve, reject) {
 	});
 });
 
-const appImages = new Vue({
-	el: "#app-images",
-});
+if ($("#app-images").length) {
+	const appImages = new Vue({
+		el: "#app-images",
+	});
+}
 
 async function loadPlugins() {
 	const ids = [];

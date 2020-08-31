@@ -273,12 +273,12 @@ Vue.component("vform", {
           </span>  
           </td>
       </tr>
-          <tr>
+          <tr v-show="toggle || torrent.studio">
               <td class="header2">studio: </td>
               <td class="lista"><input v-model="torrent.studio" /></td>
               <td class="lista"><button  type="button" @click="ndefault('studio')" title="default"><i class="fa fa-undo"></i></button></td>
           </tr>
-          <tr>
+          <tr v-show="toggle || torrent.stars">
               <td class="header2">stars: </td>
               <td class="lista"><input v-model="torrent.stars" /></td>
               <td class="lista"><button  type="button" @click="ndefault('stars')" title="default"><i class="fa fa-undo"></i></button></td>
@@ -409,7 +409,7 @@ Vue.component("vimages", function (solve, reject) {
 				return {
 					images: Torrent.images,
 					imagesDef: JSON.parse(JSON.stringify(Torrent.images)),
-					plugins: plugins || {},
+					plugins: new nobj(plugins).clone().exec(),
 					pluginsDef: JSON.parse(JSON.stringify(plugins)),
 					success: false,
 					counters: {},
@@ -422,7 +422,7 @@ Vue.component("vimages", function (solve, reject) {
 					if (!this.plugins[image.hostID]) {
 						var plugin = {
 							host: image.host,
-							fn: "src.",
+							fn: 'src.replace("","")',
 							fns: [],
 						};
 						this.$set(this.plugins, image.hostID, plugin);
@@ -525,9 +525,11 @@ Vue.component("vimages", function (solve, reject) {
 	});
 });
 
-const appImages = new Vue({
-	el: "#app-images",
-});
+if ($("#app-images").length) {
+	const appImages = new Vue({
+		el: "#app-images",
+	});
+}
 
 async function loadPlugins() {
 	const ids = [];

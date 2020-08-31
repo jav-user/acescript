@@ -77,12 +77,12 @@ Vue.component("vform", {
           </span>  
           </td>
       </tr>
-          <tr>
+          <tr v-show="toggle || torrent.studio">
               <td class="header2">studio: </td>
               <td class="lista"><input v-model="torrent.studio" /></td>
               <td class="lista"><button  type="button" @click="ndefault('studio')" title="default"><i class="fa fa-undo"></i></button></td>
           </tr>
-          <tr>
+          <tr v-show="toggle || torrent.stars">
               <td class="header2">stars: </td>
               <td class="lista"><input v-model="torrent.stars" /></td>
               <td class="lista"><button  type="button" @click="ndefault('stars')" title="default"><i class="fa fa-undo"></i></button></td>
