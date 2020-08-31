@@ -3,7 +3,7 @@
 // @namespace RarbgTorrent Script
 // @match *://rarbgweb.org/torrent/*
 // @grant none
-// @require https://jav-user.github.io/acescript/common/nes-1.0.2.js?a=1
+// @require https://jav-user.github.io/acescript/common/nes-1.0.2.js?a=2
 // @require https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js
 // @require https://www.gstatic.com/firebasejs/7.14.4/firebase-database.js
 // @require https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js
@@ -19,13 +19,13 @@
 // ==/UserScript==
 
 new ndom()
-	.addStyle(
-		"https://jav-user.github.io/acescript/rarbg/torrent-vue/torrent-vue.css",
-		"torrent-vue-css"
-	)
 	.addStyleOnce(
 		"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css",
 		"font-awesome"
+	)
+	.addStyle(
+		"https://jav-user.github.io/acescript/rarbg/torrent-vue/torrent-vue.css",
+		"torrent-vue-css"
 	);
 
 const RarbgRef = db.collection("RARBG").doc("RARBG");

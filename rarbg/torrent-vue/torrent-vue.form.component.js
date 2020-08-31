@@ -6,7 +6,7 @@ Vue.component("vform", {
             <td class="header2">Actions: </td>
             <td>
                 <button type="button" @click="toggle=!toggle">{{toggle ? "hide" : "show"}}</button>
-                <button type="submit">save</button>
+                <button type="submit"><i class="fa fa-save"></i></button>
             </td>
           </tr>
           <tr v-show="toggle">
@@ -153,7 +153,7 @@ Vue.component("vform", {
       console.log(val, this.torrent[val]);
     },
     submit(test) {
-      console.log(Torrent);
+      console.log(new nobj(Torrent).clone().exec());
     },
   },
 });

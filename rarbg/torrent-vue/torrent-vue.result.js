@@ -3,7 +3,7 @@
 // @namespace RarbgTorrent Script
 // @match *://rarbgweb.org/torrent/*
 // @grant none
-// @require https://jav-user.github.io/acescript/common/nes-1.0.2.js?a=1
+// @require https://jav-user.github.io/acescript/common/nes-1.0.2.js?a=2
 // @require https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js
 // @require https://www.gstatic.com/firebasejs/7.14.4/firebase-database.js
 // @require https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js
@@ -19,13 +19,13 @@
 // ==/UserScript==
 
 new ndom()
-	.addStyle(
-		"https://jav-user.github.io/acescript/rarbg/torrent-vue/torrent-vue.css",
-		"torrent-vue-css"
-	)
 	.addStyleOnce(
 		"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css",
 		"font-awesome"
+	)
+	.addStyle(
+		"https://jav-user.github.io/acescript/rarbg/torrent-vue/torrent-vue.css",
+		"torrent-vue-css"
 	);
 
 const RarbgRef = db.collection("RARBG").doc("RARBG");
@@ -202,7 +202,7 @@ Vue.component("vform", {
             <td class="header2">Actions: </td>
             <td>
                 <button type="button" @click="toggle=!toggle">{{toggle ? "hide" : "show"}}</button>
-                <button type="submit">save</button>
+                <button type="submit"><i class="fa fa-save"></i></button>
             </td>
           </tr>
           <tr v-show="toggle">
@@ -349,7 +349,7 @@ Vue.component("vform", {
       console.log(val, this.torrent[val]);
     },
     submit(test) {
-      console.log(Torrent);
+      console.log(new nobj(Torrent).clone().exec());
     },
   },
 });
@@ -381,7 +381,9 @@ Vue.component("vimages", function (solve, reject) {
 				v-model="plugins[image.hostID].fn"
 				v-bind:class="success ? 'input-success' : 'input-error'"
 				:size="plugins[image.hostID].fn.length"/>
-				<button @click="savePlugin(image.hostID)">save</button>
+				<button @click="savePlugin(image.hostID)">
+					<i class="fa fa-save"></i>
+				</button>
 				<br/>
 			<button @click="changeFnLeft(image.hostID)" >
 					<i class="fa fa-caret-left"></i>

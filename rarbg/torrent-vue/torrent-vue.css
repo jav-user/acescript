@@ -9,14 +9,13 @@
 
 
 .thumbnail {
-	border-width: 3px;
-	border-color: red;
+	border-width: 3px !important;
+	border-color: red !important;
 }
-
 
 
 .poster {
 	max-width: 100% !important;
-	border-width: 3px;
-	border-color: green;
+	border-width: 3px !important;
+	border-color: green !important;
 }

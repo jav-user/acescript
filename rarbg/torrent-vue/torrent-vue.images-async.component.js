@@ -20,7 +20,9 @@ Vue.component("vimages", function (solve, reject) {
 				v-model="plugins[image.hostID].fn"
 				v-bind:class="success ? 'input-success' : 'input-error'"
 				:size="plugins[image.hostID].fn.length"/>
-				<button @click="savePlugin(image.hostID)">save</button>
+				<button @click="savePlugin(image.hostID)">
+					<i class="fa fa-save"></i>
+				</button>
 				<br/>
 			<button @click="changeFnLeft(image.hostID)" >
 					<i class="fa fa-caret-left"></i>
