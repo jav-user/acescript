@@ -1,0 +1,21 @@
+.input-error {
+	color: red;
+}
+
+
+.input-success {
+	color: green;
+}
+
+
+.thumbnail {
+	border-width: 3px !important;
+	border-color: red !important;
+}
+
+
+.poster {
+	max-width: 100% !important;
+	border-width: 3px !important;
+	border-color: green !important;
+}

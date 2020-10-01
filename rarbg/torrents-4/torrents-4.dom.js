@@ -146,8 +146,11 @@ function hoverImage($File, File) {
 	}
 
 	el.onmouseover = hoverFn;
-
-	$File.$category.find("img")[0].onmouseover = hoverFn;
+	var img = $File.$category.find("img")[0];
+	img.onmouseover = hoverFn;
+	img.onmouseout = function () {
+		return nd();
+	};
 }
 function posterAll() {
 	for (var id in $Files) {

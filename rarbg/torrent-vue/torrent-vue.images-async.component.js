@@ -14,20 +14,39 @@ Vue.component("vimages", function (solve, reject) {
 		solve({
 			template: `
 	<span>
-		<span v-for="(image, id) in images">
+		<span 
+			v-for="(image, id) in images" 
+			:key="id" 
+			:set="plugin=plugins[image.hostID]"
+			>
 			<input
+				:set="pid=image.hostID"
 				:title="image.host"
-				v-model="plugins[image.hostID].fn"
+				v-model="plugin.fn"
 				v-bind:class="success ? 'input-success' : 'input-error'"
-				:size="plugins[image.hostID].fn.length"/>
-				<button @click="savePlugin(image.hostID)">
+				:size="plugin.fn.length"/>
+				<button 
+					@click="savePlugin(pid)"
+					class="bttn-unite bttn-md bttn-primary"
+					>
 					<i class="fa fa-save"></i>
 				</button>
+				<button 
+					class="bttn-unite bttn-md bttn-danger" 
+					@click="deletePlugin(image.hostID)">
+					<i class="fa fa-minus-circle"></i>
+				</button>
 				<br/>
-			<button @click="changeFnLeft(image.hostID)" >
+			<button 
+				@click="changeFnLeft(image.hostID)" 
+				class="bttn-pill bttn-md bttn-info"
+				>
 					<i class="fa fa-caret-left"></i>
 			</button>
-			<button @click="changeFnRight(image.hostID)" >
+			<button 
+				@click="changeFnRight(image.hostID)"
+				class="bttn-pill bttn-md bttn-info"
+				>
 					<i class="fa fa-caret-right"></i>
 			</button><br/>
 			<input v-model="image.src" :size="image.src.length"/>
@@ -39,6 +58,7 @@ Vue.component("vimages", function (solve, reject) {
 					v-bind:class="success ? 'poster' : 'thumbnail'"
 					/>
 			</a>
+			<br/>
 		</span>
 	</span>`,
 			data: function () {
@@ -76,8 +96,8 @@ Vue.component("vimages", function (solve, reject) {
 						function (n, o) {
 							// console.log(id, "test...");
 							this.onPlugin(id);
-						},
-						{ deep: true }
+						}
+						// { deep: true }
 					);
 					// console.log(this.$watch);
 
@@ -91,6 +111,12 @@ Vue.component("vimages", function (solve, reject) {
 				savePlugin(id) {
 					savePlugin(id, this.plugins[id]);
 				},
+				deletePlugin(id){
+					deletePlugin(id)
+					this.plugin[id].fn =".src"
+					this.plugin[id].fns =[]
+					
+				},
 				onPlugin(id) {
 					// console.log(id)
 					var host = this.plugins[id].host;
@@ -100,11 +126,11 @@ Vue.component("vimages", function (solve, reject) {
 					for (var id in this.images) {
 						var img = this.images[id];
 						if (img.host == host) {
-							this.poster2(id, fn);
+							this.poster(id, fn);
 						}
 					}
 				},
-				poster2(id, fn) {
+				poster(id, fn) {
 					// console.log(id, fn);
 					var image = this.images[id];
 					var imageDef = this.imagesDef[id];
@@ -200,4 +226,7 @@ async function loadPlugins2() {
 async function savePlugin(id, plugin) {
 	new narray(plugin.fns).push(plugin.fn).unique();
 	PluginsList.doc(id).set(plugin);
+}
+async function deletePlugin(id) {
+	PluginsList.doc(id).remove();
 }

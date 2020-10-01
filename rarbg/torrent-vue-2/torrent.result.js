@@ -24,21 +24,14 @@ new ndom()
 		"font-awesome"
 	)
 	.addStyle(
-		"https://jav-user.github.io/acescript/rarbg/torrent-vue/torrent-vue.css",
+		"https://jav-user.github.io/acescript/rarbg/torrent-vue-2/torrent-vue-2.css",
 		"torrent-vue-css"
 	)
-	/*	.addStyle(
-		"https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css",
-		"materialize-css"
-	)*/
-	// .addStyle(
-	// 	"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css",
-	// 	"bootstrap-css"
-	// )
 	.addStyleOnce(
 		"https://cdn.bootcdn.net/ajax/libs/bttn.css/0.2.4/bttn.css",
 		"bttn-css"
 	);
+
 
 const RarbgRef = db.collection("RARBG").doc("RARBG");
 const PluginsList = RarbgRef.collection("plugins_");

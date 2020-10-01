@@ -1,36 +1,47 @@
 const mergeFiles = require("merge-files");
-var __dirname = "rarbg/torrent-vue/";
-const outputPath = __dirname + "torrent-vue.result.js";
+var __dirtorrent = "rarbg/torrent-vue-2/";
+var __dirtorrents = "rarbg/torrents-4/";
+
+const __outputtorrent = __dirtorrent + "torrent.result.js";
+const __outputtorrents = __dirtorrents + "torrents.result.js";
 
 const torrents = [
-	// "_nes/nes.1.0.1.js",
-	__dirname + "torrents-4.scripts.js",
-	__dirname + "torrents-4.data.js",
-	__dirname + "torrents-4.dom.js",
-	__dirname + "torrents-4.search.js",
-	__dirname + "torrents-4.history.js",
+	__dirtorrents + "torrents-4.scripts.js",
+	__dirtorrents + "torrents-4.data.js",
+	__dirtorrents + "torrents-4.dom.js",
+	__dirtorrents + "torrents-4.search.js",
+	__dirtorrents + "torrents-4.history.js",
 ];
 
-const torrent=[
-	__dirname + "torrent-vue.scripts.js",
-	__dirname + "torrent-vue.data.js",
-	__dirname + "torrent-vue.form.component.js",
-	// __dirname + "torrent-vue.images.component.js",
-	__dirname + "torrent-vue.images-async.component.js",
-	__dirname + "torrent-vue.last.js",
+const torrent = [
+	__dirtorrent + "torrent-vue-2.scripts.js",
+	__dirtorrent + "torrent-vue-2.init.js",
+	__dirtorrent + "torrent-vue-2.data.js",
+	__dirtorrent + "torrent-vue-2.form.component.js",
+	// __dirtorrents + "torrent-vue-2.images-async.component.js",
+	__dirtorrent + "torrent-vue-2.image.component.js",
+	__dirtorrent + "torrent-vue-2.images.component.js",
+	__dirtorrent + "torrent-vue-2.last.js",
+];
 
-]
+// const inputPathList = torrents;
 
-const inputPathList= torrent;
-
-console.log(inputPathList);
+console.log(torrent, torrents);
 // status: true or false
-mergeFiles(inputPathList, outputPath)
+mergeFiles(torrent, __outputtorrent)
 	.then((success) => {
 		console.log("success", success);
+		return success;
 	})
 	.catch((err) => {
 		console.log("err", err);
 	});
 
-// console.log("done...", status)
+mergeFiles(torrents, __outputtorrents)
+	.then((success) => {
+		console.log("success", success);
+		return success;
+	})
+	.catch((err) => {
+		console.log("err", err);
+	});
