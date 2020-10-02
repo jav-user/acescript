@@ -93,5 +93,5 @@ $(document).ready(function () {
 	setInterval(() => {
 		getLinks();
 		console.log("ready...");
-	}, 10 * 1000);
+	}, 30 * 1000);
 });
