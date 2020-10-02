@@ -8,23 +8,30 @@
 
 $(".custom-links").remove();
 async function getLinks() {
-	var $episodes = Array.from($("#episodeList li"));
+	var $episodes = Array.from($("#episodeList li:not(.custom-links-done)"));
+
+	console.log("episodes " + $episodes.length);
+
 	for (var ep of $episodes) {
 		var link = $(ep).find("a").prop("href");
+		$(ep).addClass("custom-links-done");
+		await $.get(link)
+			.then((html) => {
+				var $links = Array.from(
+					$(html).find("a.Button.Sm.fa-download")
+				);
+				//console.log($links)
 
-		await $.get(link).then((html) => {
-			var $links = Array.from($(html).find("a.Button.Sm.fa-download"));
-			//console.log($links)
-			var links = $links
-				.map((a) => a.href)
-				.sort()
-				.map((link) => {
-					var host = new URL(link).hostname;
-					var arr = host.split(".");
-					var host = arr.slice(arr.length - 2).join(".");
+				var links = $links
+					.map((a) => a.href)
+					.sort()
+					.map((link) => {
+						var host = new URL(link).hostname;
+						var arr = host.split(".");
+						var host = arr.slice(arr.length - 2).join(".");
 
-					var $link = $(
-						`
+						var $link = $(
+							`
 						<small> &nbsp;   
 							<a class="custom-link"
 								target="_blank"
@@ -47,37 +54,42 @@ async function getLinks() {
 							</a>
 						</small>
 						<br/>`.trim()
-					);
+						);
 
-					$link.find(".copy").on("click", function () {
-						new nstring(link).copy();
-						alert(`${host} copied!`);
+						$link.find(".copy").on("click", function () {
+							new nstring(link).copy();
+							alert(`${host} copied!`);
+						});
+
+						$link.find(".copy-all").on("click", function () {
+							// var links = Array.from($(".custom-link")).map(a=>a.href).reverse().filter()
+							var links = Array.from($(`*[data-host="${host}"]`))
+								.reverse()
+								.map((a) => a.href);
+
+							console.log(links);
+							new nstring(links.join("\n")).copy();
+							alert(`${links.length} ${host} links copied!`);
+						});
+
+						return $link;
 					});
+				var $div = $(`<div class='custom-links'></div>`);
+				links.forEach((link) => $div.append(link));
 
-					$link.find(".copy-all").on("click", function () {
-						// var links = Array.from($(".custom-link")).map(a=>a.href).reverse().filter()
-						var links = Array.from($(`*[data-host="${host}"]`))
-							.reverse()
-							.map((a) => a.href);
-
-						console.log(links);
-						new nstring(links.join("\n")).copy();
-						alert(`${links.length} ${host} links copied!`);
-					});
-
-					return $link;
-				});
-			var $div = $(`<div class='custom-links'></div>`);
-			links.forEach((link) => $div.append(link));
-
-			$(ep).after($div.hide().fadeIn(2000));
-		});
+				$(ep).after($div.hide().fadeIn(2000));
+			})
+			.fail((err) => {
+				console.log("err", err);
+				$(ep).removeClass("custom-links-done");
+			});
 	}
 }
 
 $(document).ready(function () {
-	setTimeout(() => {
+	getLinks();
+	setInterval(() => {
 		getLinks();
 		console.log("ready...");
-	}, 1 * 1000);
+	}, 10 * 1000);
 });
