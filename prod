@@ -1,0 +1,5 @@
+[gh-pages 8ad6612] animeflv.net episodes dev =
+ 3 files changed, 8 insertions(+)
+ rename animeflv/{episodes.js => episodes.dev.js} (100%)
+ create mode 100644 animeflv/episodes.prod.js
+ create mode 100644 prod

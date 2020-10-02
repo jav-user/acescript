@@ -25,7 +25,7 @@ async function getLinks() {
 
 					var $link = $(
 						`
-						<div> &nbsp;   
+						<small> &nbsp;   
 							<a class="custom-link"
 								target="_blank"
 								data-host="${host}" 
@@ -45,7 +45,7 @@ async function getLinks() {
 								title="copy ${link}"
 								style="color:blue">copy
 							</a>
-						</div>
+						</small>
 						<br/>`.trim()
 					);
 
