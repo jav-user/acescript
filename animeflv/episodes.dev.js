@@ -8,7 +8,9 @@
 
 $(".custom-links").remove();
 async function getLinks() {
-	var $episodes = Array.from($("#episodeList li:not(.custom-links-done)"));
+	var $episodes = Array.from(
+		$("#episodeList li:not(.Next, .custom-links-done)")
+	);
 
 	console.log("episodes " + $episodes.length);
 
