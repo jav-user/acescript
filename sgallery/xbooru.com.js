@@ -31,7 +31,7 @@ function view(interval) {
 
 function blacklisted(str) {
   var isBlack = false;
-  var blacklist = ["furry", "fox", "interspecies"];
+  var blacklist = ["furry", "fox", "hybrid", "interspecies", "mammal"];
   blacklist.forEach((word) => {
     if (str.split(" ").indexOf(word) != -1) {
       isBlack = true;
