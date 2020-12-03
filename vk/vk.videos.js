@@ -82,7 +82,7 @@ function createGUIItems() {
     var _title = $(item).find("a").text().toLowerCase();
 
     $(item)
-      .append(
+      .append($(
         `
   <div 
     title="Select ${title}"
@@ -95,7 +95,7 @@ function createGUIItems() {
       type="checkbox"/>Seleccionar
   <button class="copy-selected">copy selected</button>
   </div>
-`
+`).hide().fadeIn(1000)
       )
       .addClass("ndev");
 
