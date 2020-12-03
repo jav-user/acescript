@@ -41,7 +41,7 @@ async function list() {
       $(img)
         .css("opacity", 0.15)
         .on("mouseover", function () {
-          $(this).css("opacity", 1);
+          $(this).css("opacity", .6);
         })
         .on("mouseout", function () {
           $(this).css("opacity", 0.15);

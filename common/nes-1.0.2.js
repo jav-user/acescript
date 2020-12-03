@@ -245,6 +245,25 @@ class nstring {
 			.replace(/[|]/g, "-");
 		return this;
 	}
+
+   includesEvery(arr) {
+         
+        let includes = (el) => this.val.includes((el + ""));
+        return arr.every(includes);
+    };
+
+    includesSome(arr) {
+         
+        let includes = (el) => this.val.includes((el + ""));
+        return arr.some(includes);
+    };
+
+    String.prototype.includesSome = function (arr) {
+        let str = this.toString().toLowerCase();
+        let includes = (el) => str.includes((el + "").toLowerCase());
+        return arr.some(includes);
+    };
+
 	exec() {
 		return this.val;
 	}
