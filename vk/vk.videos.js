@@ -82,8 +82,9 @@ function createGUIItems() {
     var _title = $(item).find("a").text().toLowerCase();
 
     $(item)
-      .append($(
-        `
+      .append(
+        $(
+          `
   <div 
     title="Select ${title}"
     class="ndev"
@@ -95,7 +96,10 @@ function createGUIItems() {
       type="checkbox"/>Seleccionar
   <button class="copy-selected">copy selected</button>
   </div>
-`).hide().fadeIn(1000)
+`
+        )
+          .hide()
+          .fadeIn(1000)
       )
       .addClass("ndev");
 
@@ -108,7 +112,10 @@ function createGUIItems() {
         "nakedsword",
         "tranny",
         "shemale",
-        "[men]"
+        "[men]",
+        "[staxus]",
+        "helixstudios",
+        "twink deluxe ",
       ])
     ) {
       /*  if(_title.includes("gay") 
