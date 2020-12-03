@@ -4,7 +4,8 @@
 // @match https://vk.com/search
 // @match https://vk.com/videos-*
 // @require https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js
-// @require https://jav-user.github.io/acescript/common/nes-1.0.2.js?a=1
+// @require https://jav-user.github.io/acescript/common/nes-1.0.2.js
+//// @require https://jav-user.github.io/acescript/vk/vk.videos.js
 // @grant none
 // ==/UserScript==
 
